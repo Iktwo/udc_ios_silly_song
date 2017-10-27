@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension ViewController: UITextFieldDelegate {
+extension CreateLyricsViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return false
@@ -30,17 +30,16 @@ func shortName(from name: String) -> String {
     return String(lowercaseName.suffix(from: index))
 }
 
-let bananaFanaTemplate = [
-    "<FULL_NAME>, <FULL_NAME>, Bo B<SHORT_NAME>",
-    "Banana Fana Fo F<SHORT_NAME>",
-    "Me My Mo M<SHORT_NAME>",
-    "<FULL_NAME>"].joined(separator: "\n")
-
 func lyricsForName(lyricsTemplate: String, fullName: String) -> String {
     return lyricsTemplate.replacingOccurrences(of: "<FULL_NAME>", with: fullName).replacingOccurrences(of: "<SHORT_NAME>", with: shortName(from: fullName))
 }
 
-class ViewController: UIViewController {
+class CreateLyricsViewController: UIViewController {
+    let bananaFanaTemplate = [
+        "<FULL_NAME>, <FULL_NAME>, Bo B<SHORT_NAME>",
+        "Banana Fana Fo F<SHORT_NAME>",
+        "Me My Mo M<SHORT_NAME>",
+        "<FULL_NAME>"].joined(separator: "\n")
 
     @IBOutlet weak var lyricsView: UITextView!
     
@@ -49,11 +48,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         nameField.delegate = self
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func reset(_ sender: Any) {
